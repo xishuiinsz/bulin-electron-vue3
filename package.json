@@ -14,7 +14,9 @@
   },
   "main": "background.js",
   "dependencies": {
+    "ant-design-vue": "^3.2.14",
     "core-js": "^3.6.5",
+    "exceljs": "^4.3.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -28,6 +30,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-import": "^1.13.5",
     "electron": "21.0.0",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",

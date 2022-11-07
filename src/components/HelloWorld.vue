@@ -1,21 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button @click="click"> 计数器{{ count }}</button>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
 defineProps({
   msg: {
     type: String,
     default: ''
   }
 })
-const count = ref(0)
-const click = () => {
-  count.value++
-}
 </script>
 <script>
 export default {
