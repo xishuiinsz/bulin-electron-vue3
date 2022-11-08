@@ -18,7 +18,7 @@ module.exports = {
   plugins: ["vue"],
   rules: {
     "vue/no-multiple-template-root": "off",
-
+    "vue/no-v-model-argument": "off",
     "no-unused-vars": [
       "error",
       // we are only using this rule to check for unused arguments since TS
