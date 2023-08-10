@@ -45,6 +45,10 @@ async function createWindow() {
   // 开始按规划填充
   const fillTextHandler = require("./fillText.js");
   ipcMain.handle("fillTextHandle", fillTextHandler);
+
+  // 导出图片信息
+  const exportPicturesInJson = require("./exportPicturesInJson.js");
+  ipcMain.handle("exportPicturesInJson", exportPicturesInJson);
 }
 
 // Quit when all windows are closed.

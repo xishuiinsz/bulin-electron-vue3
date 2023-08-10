@@ -17,6 +17,7 @@
     "ant-design-vue": "^3.2.14",
     "core-js": "^3.6.5",
     "exceljs": "^4.3.0",
+    "imageinfo": "^1.0.4",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"

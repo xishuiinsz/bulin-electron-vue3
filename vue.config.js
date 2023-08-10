@@ -1,4 +1,7 @@
 const path = require("path");
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 module.exports = {
   pluginOptions: {
     electronBuilder: {
@@ -11,6 +14,13 @@ module.exports = {
             return "[name].js";
           }
         });
+      },
+    },
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "@": resolve("src"),
       },
     },
   },

@@ -6,6 +6,8 @@ window.addEventListener("DOMContentLoaded", () => {
     showDirDlg: () => ipcRenderer.invoke("dialog:showDirDlg"),
     listFiles: (path) => ipcRenderer.invoke("listFiles", path),
     fillTextHandle: (option) => ipcRenderer.invoke("fillTextHandle", option),
+    exportPicturesInJson: (option) =>
+      ipcRenderer.invoke("exportPicturesInJson", option),
     // 能暴露的不仅仅是函数，我们还可以暴露变量
   });
 });
