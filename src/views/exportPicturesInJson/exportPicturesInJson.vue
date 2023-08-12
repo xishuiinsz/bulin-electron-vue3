@@ -11,9 +11,6 @@
                     <a-form-item label="文件清单">
                         <a-textarea v-model:value="formState.fileList" />
                     </a-form-item>
-                    <a-form-item label="导出文件">
-                        <a-input placeholder="请输入文件名" v-model:value="formState.jsonFileName" />
-                    </a-form-item>
                 </a-form>
             </a-col>
             <a-col :span="2"></a-col>
@@ -29,16 +26,14 @@
     </div>
 </template>
 <script setup>
-import { reactive, getCurrentInstance } from 'vue';
+import { message } from 'ant-design-vue';
+import { reactive } from 'vue';
 import { imgExt } from '@/utils/const.js'
-const jsonNameDefault = 'myJson.json'
 const formState = reactive({
     dirPath: '',
     fileList: '',
-    jsonFileName: jsonNameDefault,
 })
-// 当前组件实例
-const vm = getCurrentInstance()
+
 let flagDirClick = false
 // 目录选择点击事件
 const inputDirChoose = async (e) => {
@@ -67,24 +62,6 @@ const inputDirChoose = async (e) => {
     }
 }
 
-// 检视导出文件名配置
-const jsonNameCheck = () => {
-    const extJson = '.json'
-    if (!formState.jsonFileName || !(formState.jsonFileName.trim())) {
-        formState.jsonFileName = jsonNameDefault
-        return true
-    }
-    if (formState.jsonFileName === extJson) {
-        formState.jsonFileName = jsonNameDefault
-        return true
-    }
-
-    if (!formState.jsonFileName.endsWith(extJson)) {
-        formState.jsonFileName += extJson
-    }
-    return true
-}
-
 // 导出 点击事件
 const exportPicturesInJson = async () => {
     // 基本校验
@@ -95,19 +72,13 @@ const exportPicturesInJson = async () => {
         }
         return
     }
-    jsonNameCheck()
     const exportOption = {
         dirPath: formState.dirPath,
-        jsonFileName: formState.jsonFileName
     }
 
-    let result = await window.electron.exportPicturesInJson(exportOption)
-    console.log(result)
+    const result = await window.electron.exportPicturesInJson(exportOption)
+    console.log(result);
+    !!result && message.success(`文件已成功保存至${result}`);
 }
 
-</script>
-<script>
-export default {
-    name: 'AboutComp'
-}
 </script>

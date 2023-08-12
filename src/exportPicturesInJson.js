@@ -59,6 +59,7 @@ function exportPicturesInJson(event, option) {
       });
       //关闭文件
       fs.closeSync(fd);
+      event.sender.send("测试");
     })
     .catch((err) => {
       console.log(err);
