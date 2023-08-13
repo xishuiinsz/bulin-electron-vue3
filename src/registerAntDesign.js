@@ -11,6 +11,7 @@ import "ant-design-vue/lib/form/style/css"; // 加载 CSS
 import "ant-design-vue/lib/col/style/css"; // 加载 CSS
 import "ant-design-vue/lib/row/style/css"; // 加载 CSS
 import "ant-design-vue/lib/button/style/css"; // 加载 CSS
+import "ant-design-vue/lib/message/style/css"; // 加载 CSS
 const { TextArea } = Input;
 const componentList = [
   DatePicker,

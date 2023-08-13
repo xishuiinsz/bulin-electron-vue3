@@ -26,43 +26,40 @@ function getJsonStr(fileList, dir) {
   return json;
 }
 
-function exportPicturesInJson(event, option) {
+async function exportPicturesInJson(event, option) {
   const dir = option.dirPath;
   const fileList = fs.readdirSync(dir);
   const jsonStr = getJsonStr(fileList, dir);
 
   //调用dialog的showSaveDialog
-  dialog
-    .showSaveDialog({
-      title: "保存文件",
-      defaultPath: ".",
-      nameFieldLabel: "请输入要保存的文件名",
-      //这里选择saveFile
-      properties: ["saveFile"],
-      filters: [
-        //根据需要设置文件类型
-        { name: ".json", extensions: ["json"] },
-      ],
-    })
-    .then((result) => {
-      //打开选择的保存文件路径
-      const fd = fs.openSync(result.filePath, "w");
-      //将数据写入文件
-      fs.writeFile(fd, jsonStr, function (err) {
-        if (err) {
-          console.error(err);
-        }
-        new Notification({
-          title: NOTIFICATION_TITLE,
-          body: NOTIFICATION_BODY,
-        }).show();
-      });
-      //关闭文件
-      fs.closeSync(fd);
-      event.sender.send("测试");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const result = await dialog.showSaveDialog({
+    title: "保存文件",
+    defaultPath: ".",
+    nameFieldLabel: "请输入要保存的文件名",
+    //这里选择saveFile
+    properties: ["saveFile"],
+    filters: [
+      //根据需要设置文件类型
+      { name: ".json", extensions: ["json"] },
+    ],
+  });
+
+  //打开选择的保存文件路径
+  const fd = fs.openSync(result.filePath, "w");
+  //将数据写入文件
+  fs.writeFile(fd, jsonStr, function (err) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    event.sendReply("sendReply");
+    new Notification({
+      title: NOTIFICATION_TITLE,
+      body: NOTIFICATION_BODY,
+    }).show();
+  });
+  //关闭文件
+  fs.closeSync(fd);
+  return `文件已成功写入${result.filePath}`;
 }
 module.exports = exportPicturesInJson;

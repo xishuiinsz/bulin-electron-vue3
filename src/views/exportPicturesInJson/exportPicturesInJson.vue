@@ -77,7 +77,6 @@ const exportPicturesInJson = async () => {
     }
 
     const result = await window.electron.exportPicturesInJson(exportOption)
-    console.log(result);
     !!result && message.success(`文件已成功保存至${result}`);
 }
 
