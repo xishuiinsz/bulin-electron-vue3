@@ -8,6 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
     fillTextHandle: (option) => ipcRenderer.invoke("fillTextHandle", option),
     exportPicturesInJson: (option) =>
       ipcRenderer.invoke("exportPicturesInJson", option),
+    generatePicWithBase64: (option) =>
+      ipcRenderer.invoke("generatePicWithBase64", option),
     // 能暴露的不仅仅是函数，我们还可以暴露变量
   });
 });

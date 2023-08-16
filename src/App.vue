@@ -2,7 +2,8 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/excelBatchFill">Excel批量修改小工具</router-link> |
-    <router-link to="/exportPicturesInJson">导出全部图片信息为JSON格式</router-link>
+    <router-link to="/exportPicturesInJson">导出全部图片信息为JSON格式</router-link> |
+    <router-link to="/generatePicture">生成图片</router-link>
   </div>
   <router-view />
 </template>

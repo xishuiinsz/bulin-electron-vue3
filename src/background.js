@@ -13,8 +13,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -49,6 +49,10 @@ async function createWindow() {
   // 导出图片信息
   const exportPicturesInJson = require("./exportPicturesInJson.js");
   ipcMain.handle("exportPicturesInJson", exportPicturesInJson);
+
+  // 批量生成图片信息
+  const generatePicWithBase64 = require("./generatePicWithBase64.js");
+  ipcMain.handle("generatePicWithBase64", generatePicWithBase64);
 }
 
 // Quit when all windows are closed.
