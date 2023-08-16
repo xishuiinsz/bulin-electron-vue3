@@ -34,6 +34,10 @@ async function createWindow() {
     win.loadURL("app://./index.html");
   }
 
+  // 显示选择文件夹对话框-同步
+  const dirChooseSync = require("./dirChooseSync.js");
+  ipcMain.handle("dirChooseSync", dirChooseSync);
+
   // 显示选择文件夹对话框
   const showDirDlg = require("./dialogShow.js");
   ipcMain.handle("dialog:showDirDlg", showDirDlg);

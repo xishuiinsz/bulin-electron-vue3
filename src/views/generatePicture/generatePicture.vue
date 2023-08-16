@@ -84,9 +84,10 @@
     </div>
 </template>
 <script setup>
-import { Modal } from 'ant-design-vue';
+import { Modal, message } from 'ant-design-vue';
 import { ref, reactive, h } from 'vue';
 import { getRandomInt } from '@/utils'
+const cache = {}
 const widthMode = ref('0')
 const width = ref(50)
 const widthRange = reactive({
@@ -112,6 +113,8 @@ const generateCanvas = ({ width, height, text }) => {
     canvas.height = height;
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
+    ctx.fillStyle = '#d5d5d5';// 设置填充画笔颜色为红色，即字体颜色
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'red';// 设置填充画笔颜色为红色，即字体颜色
     ctx.font = '28px serif';// 设置字体大小
     ctx.fillText(text, 20, 60);// 绘制 "实心" 文字
@@ -127,13 +130,18 @@ const generatePic = () => {
         const contentPic = content.value ? content.value : `${widthPic} X ${heightPic}`
         const canvas = generateCanvas({ width: widthPic, height: heightPic, text: contentPic })
         const base64 = canvas.toDataURL()
-        window.electron.generatePicWithBase64({ imgData: base64, width: widthPic, height: heightPic, text: contentPic }).then(resp => {
+        window.electron.generatePicWithBase64({ imgData: base64, width: widthPic, height: heightPic, text: contentPic, path: cache.path }).then(resp => {
             console.log(resp);
         })
     }
 }
 // “生成” 按钮点击事件
 const preGeneratePic = async () => {
+    Object.assign(cache, { path: '' })
+    cache.path = await window.electron.dirChooseSync()
+    if (!cache.path) {
+        message.info('必须选择图片只在的目录!')
+    }
     if (qty.value > thresholdQty) {
         Modal.confirm({
             title: '请确认',

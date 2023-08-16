@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const { contextBridge, ipcRenderer } = require("electron");
   contextBridge.exposeInMainWorld("electron", {
     showDirDlg: () => ipcRenderer.invoke("dialog:showDirDlg"),
+    dirChooseSync: () => ipcRenderer.invoke("dirChooseSync"),
     listFiles: (path) => ipcRenderer.invoke("listFiles", path),
     fillTextHandle: (option) => ipcRenderer.invoke("fillTextHandle", option),
     exportPicturesInJson: (option) =>

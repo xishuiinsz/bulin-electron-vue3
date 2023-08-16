@@ -12,19 +12,14 @@ const getFileName = (width, height) => {
   str += Date.now();
   return str;
 };
-async function generatePicWithBase64(event, { imgData, width, height, text }) {
-  //调用dialog的showSaveDialog
-  const paths = await dialog.showOpenDialogSync({
-    title: "选择保存图片的文件夹",
-    defaultPath: ".",
-    //这里选择saveFile
-    properties: ["openDirectory"],
-  });
-  const [filePath] = paths;
+async function generatePicWithBase64(
+  event,
+  { imgData, width, height, text, path }
+) {
   const base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
   const dataBuffer = Buffer.from(base64Data, "base64");
   const name = getFileName(width, height, text);
-  const result = fs.writeFileSync(`${filePath}/${name}.png`, dataBuffer);
-  return `文件已成功写入${filePath}`;
+  const result = fs.writeFileSync(`${path}/${name}.png`, dataBuffer);
+  return `文件已成功写入${path}`;
 }
 module.exports = generatePicWithBase64;
