@@ -1,6 +1,6 @@
 <template>
     <div class="generate-picture">
-        <h3>生成图片</h3>
+        <h3>批量生成图片</h3>
         <a-form name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }" autocomplete="off">
             <a-form-item style="text-align: left;" label="宽度模式">
                 <a-radio-group v-model:value="widthMode" name="radioGroup">
@@ -140,7 +140,8 @@ const preGeneratePic = async () => {
     Object.assign(cache, { path: '' })
     cache.path = await window.electron.dirChooseSync()
     if (!cache.path) {
-        message.info('必须选择图片只在的目录!')
+        message.info('请选择图片保存的文件夹！')
+        return
     }
     if (qty.value > thresholdQty) {
         Modal.confirm({

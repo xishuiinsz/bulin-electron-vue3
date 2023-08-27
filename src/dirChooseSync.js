@@ -6,10 +6,11 @@ async function dirChooseSync(event, option) {
     //这里选择saveFile
     properties: ["openDirectory"],
   };
+  const _option = {};
   !!option &&
     Object.keys(option).length &&
-    Object.assign(defaultConfig, option);
-  const paths = await dialog.showOpenDialogSync(defaultConfig);
+    Object.assign(_option, defaultConfig, option);
+  const paths = await dialog.showOpenDialogSync(_option);
   if (!paths) {
     return "";
   }

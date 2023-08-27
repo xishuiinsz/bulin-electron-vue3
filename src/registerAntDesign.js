@@ -10,9 +10,12 @@ import {
   Radio,
   InputNumber,
   Space,
+  Steps,
+  Menu,
 } from "ant-design-vue"; // 加载 JS
-import "ant-design-vue/dist/antd.css";
+import "ant-design-vue/dist/reset.css";
 const { TextArea } = Input;
+const { Step } = Steps;
 const componentList = [
   DatePicker,
   Input,
@@ -26,6 +29,9 @@ const componentList = [
   Radio,
   InputNumber,
   Space,
+  Steps,
+  Step,
+  Menu,
 ];
 const install = (app) => {
   componentList.forEach((comp) => app.component(comp.name, comp));

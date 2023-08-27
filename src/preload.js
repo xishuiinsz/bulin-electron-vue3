@@ -4,13 +4,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const { contextBridge, ipcRenderer } = require("electron");
   contextBridge.exposeInMainWorld("electron", {
     showDirDlg: () => ipcRenderer.invoke("dialog:showDirDlg"),
-    dirChooseSync: () => ipcRenderer.invoke("dirChooseSync"),
+    dirChooseSync: (option) => ipcRenderer.invoke("dirChooseSync", option),
     listFiles: (path) => ipcRenderer.invoke("listFiles", path),
     fillTextHandle: (option) => ipcRenderer.invoke("fillTextHandle", option),
     exportPicturesInJson: (option) =>
       ipcRenderer.invoke("exportPicturesInJson", option),
     generatePicWithBase64: (option) =>
       ipcRenderer.invoke("generatePicWithBase64", option),
-    // 能暴露的不仅仅是函数，我们还可以暴露变量
   });
 });
